@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codergy.userservice.ScalerImplementation.dtos.SetUserRolesDto;
 import com.codergy.userservice.ScalerImplementation.dtos.UserDto;
-import com.codergy.userservice.ScalerImplementation.models.User;
 import com.codergy.userservice.ScalerImplementation.services.UserService;
-import com.mysql.cj.x.protobuf.MysqlxDatatypes.Object;
 
 @RestController
 @RequestMapping("/user")
@@ -28,9 +26,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}") 
     public ResponseEntity<UserDto> getUserById(@RequestHeader(HttpHeaders.AUTHORIZATION) String authToken ,@PathVariable Long id) throws Exception
     {
+        System.out.println("AUTH TOKEN:");
+        System.out.println(authToken);
+
         UserDto userDto = userService.getUserById(id);
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
